@@ -25,7 +25,7 @@
 #include <myUtils.h>
 
 #define DEBUG__EIN  //"Schalter" zum aktivieren von DEBUG-Ausgaben
-#include <SoftwareSerial.h>
+#include <espSoftwareSerial.h>   //INFO: im cpp falsche include  ändern auf #include "espSoftwareSerial.h"
 #include <myDebug.h>
 #include <truma.h>
 
@@ -86,7 +86,7 @@ uint16_t fan      = 0;      // Ventilator (off=0,Stufe1=1 - Stufe10=10,Eco=11,Hi
 boolean rst       = false;  // Error reset (if=1)
 
 // Temperature code [degC] 5-30 (0-4)=0xAA=off
-//                            off                5     6     7     8     9     10    11    12    13    14    15    16    17    18    19    20    21     22   23    24    25    26    27    28    29    30
+//                                off                5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21     22   23    24    25    26    27    28    29    30
 uint8_t tempHex[] = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xDC, 0xE6, 0xF0, 0xFA, 0x04, 0x0E, 0x18, 0x22, 0x2C, 0x36, 0x40, 0x4A, 0x54, 0x5E, 0x68, 0x72, 0x7C, 0x86, 0x90, 0x9A, 0xA4, 0xAE, 0xB8, 0xC2, 0xCC, 0xD6};
 
 //------------------------------------------
@@ -256,7 +256,7 @@ bool readFrame(uint8_t mID) {
       for (int i = 0; i < 8; i++) {  // war 9
         Serial_printf("%02x:", LinMessageA[i]);
       }
-      uint8_t cksum = LinMessageA[8];  // INFO:
+      uint8_t cksum = LinMessageA[8];
       Serial.print(" - ");
       Serial_printf("%02x:", cksum);
 
